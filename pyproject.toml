@@ -9,6 +9,9 @@ dependencies = ["pin"]
 [project.urls]
 homepage = "https://github.com/loco-3d/ndcurves"
 
+[tool.cmeel]
+build-number = 1
+
 [tool.black]
 exclude = "cmake"
 
@@ -21,4 +24,3 @@ requires = [
     "pin"
     ]
 build-backend = "cmeel.build"
-build-number = 1
