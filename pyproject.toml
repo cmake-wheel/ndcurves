@@ -10,7 +10,7 @@ dependencies = ["pin"]
 homepage = "https://github.com/loco-3d/ndcurves"
 
 [tool.cmeel]
-build-number = 1
+build-number = 2
 
 [tool.black]
 exclude = "cmake"
