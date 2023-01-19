@@ -1,6 +1,6 @@
 [project]
 name = "ndcurves"
-version = "1.1.5.1"
+version = "1.1.5.2"
 description = "Library for creating smooth cubic splines"
 readme = "README.md"
 license= "BSD-3-Clause"
@@ -8,9 +8,6 @@ dependencies = ["pin"]
 
 [project.urls]
 homepage = "https://github.com/loco-3d/ndcurves"
-
-[tool.cmeel]
-build-number = 2
 
 [tool.black]
 exclude = "cmake"
