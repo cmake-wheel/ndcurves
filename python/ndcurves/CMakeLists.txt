@@ -9,11 +9,12 @@ set(${PROJECT_NAME}_WRAP_SOURCES
 
 set(wrap ${PROJECT_NAME}_wrap)
 add_library(${wrap} SHARED ${${PROJECT_NAME}_WRAP_SOURCES})
-set_target_properties(
-  ${wrap}
-  PROPERTIES PREFIX ""
-             OUTPUT_NAME ${PROJECT_NAME}
-             INSTALL_RPATH "\$ORIGIN/../../..")
+set_target_properties(${wrap} PROPERTIES PREFIX "" OUTPUT_NAME ${PROJECT_NAME})
+IF(APPLE)
+  SET_TARGET_PROPERTIES(${wrap} PROPERTIES INSTALL_RPATH "@loader_path/../../..")
+ELSEIF(UNIX)
+  SET_TARGET_PROPERTIES(${wrap} PROPERTIES INSTALL_RPATH "\$ORIGIN/../../..")
+ENDIF()
 target_compile_options(${wrap} PRIVATE "-Wno-conversion")
 target_link_libraries(${wrap} PUBLIC ${PROJECT_NAME})
 target_link_libraries(${wrap} PUBLIC eigenpy::eigenpy)
