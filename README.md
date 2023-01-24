@@ -48,8 +48,10 @@ The library is header only, so the build only serves to build the tests and pyth
 
 ```sh
 cd $NDCURVES_DIR && mkdir build && cd build
-cmake .. && make && make test
+cmake -DBUILD_PYTHON_INTERFACE=ON .. && make && make test
 ```
+
+Switch the BUILD_PYTHON argument to OFF if you don't want to use the python bindings of the package.
 
 If everything went fine you should obtain the following output:
 ```sh
@@ -74,5 +76,21 @@ In spite of an exhaustive documentation, please refer to the C++ documentation, 
 Documentation and tutorial
 -------------
 
+For the C++ / Python detailed documentation, you can consult [this pdf](https://github.com/loco-3d/ndcurves/blob/devel/doc/curves.pdf) available in the doc folder
+
 For a python tutorial, you can refer to the [jupyter notebook](https://github.com/loco-3d/ndcurves/blob/master/python/test/sandbox/test.ipynb).
 The [test file](https://github.com/loco-3d/ndcurves/blob/master/python/test/test.py) is more exhaustive and rather self explanatory.
+
+Citation
+------
+
+If you wish to cite this work please use the bibtex below:
+
+```bib
+@software{ndcurves,
+  author = {Tonneau, Steve and Chemin, Jason and Fernbach, Pierre and Saurel, Guilhem},
+  title = {ndcurves},
+  url = {https://github.com/loco-3d/ndcurves},
+  year = {2013}
+}
+```
