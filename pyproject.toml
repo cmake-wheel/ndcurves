@@ -12,11 +12,14 @@ homepage = "https://github.com/loco-3d/ndcurves"
 [tool.black]
 exclude = "cmake"
 
+[tool.cmeel]
+configure-args = ["-DBUILD_PYTHON_INTERFACE=ON"]
+
 [build-system]
+build-backend = "cmeel.build"
 requires = [
     "cmeel[build]",
     "cmeel-eigen",
     "cmeel-urdfdom-headers",
     "pin"
     ]
-build-backend = "cmeel.build"
