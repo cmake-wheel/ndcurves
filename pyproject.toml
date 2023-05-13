@@ -7,7 +7,7 @@ dependencies = ["pin >= 2.6.18, < 3"]
 description = "Library for creating smooth cubic splines"
 license = "BSD-3-Clause"
 name = "ndcurves"
-version = "1.1.6"
+version = "1.2.0"
 
 [project.urls]
 homepage = "https://github.com/loco-3d/ndcurves"
@@ -16,7 +16,6 @@ homepage = "https://github.com/loco-3d/ndcurves"
 exclude = "cmake"
 
 [tool.cmeel]
-build-number = 1
 configure-args = ["-DBUILD_PYTHON_INTERFACE=ON"]
 
 [tool.tomlsort]
