@@ -16,6 +16,7 @@ homepage = "https://github.com/loco-3d/ndcurves"
 exclude = "cmake"
 
 [tool.cmeel]
+build-number = 1
 configure-args = ["-DBUILD_PYTHON_INTERFACE=ON"]
 
 [tool.tomlsort]
