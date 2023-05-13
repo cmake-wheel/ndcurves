@@ -1,4 +1,3 @@
-import eigenpy
 import numpy as np
 from numpy import array, identity
 
@@ -12,8 +11,6 @@ from .plot_bezier import plotBezier, plt
 from qp import quadprog_solve_qp, to_least_square
 
 np.set_printoptions(formatter={"float": lambda x: "{0:0.1f}".format(x)})
-
-eigenpy.switchToNumpyArray()
 
 
 # points given as pairs (pt, t)
@@ -59,7 +56,6 @@ def default_fit(
 # return A, b
 
 if __name__ == "__main__":
-
     waypoints = array(
         [
             [1.0, 2.0, 3.0, 0.0],
