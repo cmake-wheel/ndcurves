@@ -1,9 +1,16 @@
 [build-system]
 build-backend = "cmeel"
-requires = ["cmeel[build]", "pin[build] >= 2.6.18, < 3"]
+requires = [
+  "cmeel-boost[build] ~= 1.83.0",
+  "cmeel[build]",
+  "pin[build] ~= 2.6.21"
+]
 
 [project]
-dependencies = ["pin >= 2.6.18, < 3"]
+dependencies = [
+  "cmeel-boost ~= 1.83.0",
+  "pin ~= 2.6.21"
+]
 description = "Library for creating smooth cubic splines"
 license = "BSD-3-Clause"
 name = "ndcurves"
