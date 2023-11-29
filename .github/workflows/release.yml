@@ -30,6 +30,13 @@ jobs:
             tests: "ON"
           - arch: "x86_64"
             tests: "OFF"
+          - os: "macos-latest"
+            build: "cp38-*"
+            tests: "ON"
+        include:
+          - os: "macos-latest"
+            build: "cp38-*"
+            tests: "OFF"
     steps:
       - uses: actions/checkout@v4
         with:
