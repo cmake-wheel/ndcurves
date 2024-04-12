@@ -7,7 +7,7 @@ from scipy.spatial import ConvexHull
 def genConvexHullLines(points):
     hull = ConvexHull(points)
     lineList = [points[el] for el in hull.vertices] + [points[hull.vertices[0]]]
-    lineList = [array(el[:2].tolist() + [0.0]) for el in lineList]
+    lineList = [array([*el[:2].tolist(), 0.0]) for el in lineList]
     return [
         [lineList[i], lineList[i + 1]] for i in range(len(hull.vertices))
     ], lineList[:-1]
@@ -30,12 +30,13 @@ def getLineFromSegment(line):
 def genFromLine(line, num_points, ranges, existing_points=[]):
     """generate right of the line"""
     coeff, rhs = getLineFromSegment(line)
-    gen = existing_points + [line[0][:2], line[1][:2]]
+    gen = [*existing_points, line[0][:2], line[1][:2]]
+    rng = np.random.default_rng()
     while len(gen) < num_points:
         pt = array(
             [
-                np.random.uniform(ranges[0][0], ranges[0][1]),
-                np.random.uniform(ranges[1][0], ranges[1][1]),
+                rng.uniform(ranges[0][0], ranges[0][1]),
+                rng.uniform(ranges[1][0], ranges[1][1]),
             ]
         )
         if coeff[:2].dot(pt) <= rhs:

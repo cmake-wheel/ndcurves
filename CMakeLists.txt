@@ -19,19 +19,37 @@ set(CXX_DISABLE_WERROR TRUE)
 
 # JRL-cmakemodule setup
 set(JRL_CMAKE_MODULES "${CMAKE_CURRENT_LIST_DIR}/cmake")
-if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/base.cmake")
-  message(STATUS "JRL cmakemodules not found. Let's fetch it.")
-  include(FetchContent)
-  FetchContent_Declare(
-    "jrl-cmakemodules"
-    GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git")
-  FetchContent_MakeAvailable("jrl-cmakemodules")
-  FetchContent_GetProperties("jrl-cmakemodules" SOURCE_DIR JRL_CMAKE_MODULES)
+if(EXISTS "${JRL_CMAKE_MODULES}/base.cmake")
+  message(STATUS "JRL cmakemodules found in 'cmake/' git submodule")
+else()
+  find_package(jrl-cmakemodules QUIET CONFIG)
+  if(jrl-cmakemodules_FOUND)
+    get_property(
+      JRL_CMAKE_MODULES
+      TARGET jrl-cmakemodules::jrl-cmakemodules
+      PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+    message(STATUS "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}")
+  elseif(${CMAKE_VERSION} VERSION_LESS "3.14.0")
+    message(
+      FATAL_ERROR
+        "\nCan't find jrl-cmakemodules. Please either:\n"
+        "  - use git submodule: 'git submodule update --init'\n"
+        "  - or install https://github.com/jrl-umi3218/jrl-cmakemodules\n"
+        "  - or upgrade your CMake version to >= 3.14 to allow automatic fetching\n"
+    )
+  else()
+    message(STATUS "JRL cmakemodules not found. Let's fetch it.")
+    include(FetchContent)
+    FetchContent_Declare(
+      "jrl-cmakemodules"
+      GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git")
+    FetchContent_MakeAvailable("jrl-cmakemodules")
+    FetchContent_GetProperties("jrl-cmakemodules" SOURCE_DIR JRL_CMAKE_MODULES)
+  endif()
 endif()
 
 include("${JRL_CMAKE_MODULES}/base.cmake")
 include("${JRL_CMAKE_MODULES}/boost.cmake")
-include("${JRL_CMAKE_MODULES}/python.cmake")
 include(CMakeDependentOption)
 
 cmake_dependent_option(
@@ -75,8 +93,8 @@ set(PACKAGE_EXTRA_MACROS
 add_project_dependency(Boost REQUIRED COMPONENTS serialization)
 
 if(BUILD_PYTHON_INTERFACE)
-  add_project_dependency(eigenpy 2.9.0 REQUIRED PKG_CONFIG_REQUIRES
-                         "eigenpy >= 2.9.0")
+  add_project_dependency(eigenpy 3.0.0 REQUIRED PKG_CONFIG_REQUIRES
+                         "eigenpy >= 3.0.0")
 endif(BUILD_PYTHON_INTERFACE)
 
 # Main Library
@@ -109,7 +127,8 @@ set(${PROJECT_NAME}_HEADERS
     include/${PROJECT_NAME}/serialization/eigen-matrix.hpp
     include/${PROJECT_NAME}/serialization/registeration.hpp
     include/${PROJECT_NAME}/sinusoidal.h
-    include/${PROJECT_NAME}/so3_linear.h)
+    include/${PROJECT_NAME}/so3_linear.h
+    include/${PROJECT_NAME}/so3_smooth.h)
 
 add_library(${PROJECT_NAME} INTERFACE)
 modernize_target_link_libraries(
@@ -120,8 +139,8 @@ modernize_target_link_libraries(
   Eigen3::Eigen
   INCLUDE_DIRS
   ${EIGEN3_INCLUDE_DIR})
-target_include_directories(${PROJECT_NAME}
-                           INTERFACE $<INSTALL_INTERFACE:include>)
+target_include_directories(
+  ${PROJECT_NAME} INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_link_libraries(${PROJECT_NAME} INTERFACE Boost::serialization)
 if(CURVES_WITH_PINOCCHIO_SUPPORT)
   target_link_libraries(${PROJECT_NAME} INTERFACE pinocchio::pinocchio)

@@ -1,13 +1,14 @@
 ci:
   autoupdate_branch: devel
 repos:
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.1.2
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.3.5
   hooks:
   - id: ruff
     args:
     - --fix
     - --exit-non-zero-on-fix
+  - id: ruff-format
 - repo: https://github.com/cheshirekow/cmake-format-precommit
   rev: v0.6.13
   hooks:
@@ -16,14 +17,15 @@ repos:
   rev: v0.23.1
   hooks:
   - id: toml-sort-fix
+    exclude: poetry.lock
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v17.0.5
+  rev: v18.1.3
   hooks:
   - id: clang-format
     args:
     - --style=Google
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v4.6.0
   hooks:
   - id: check-added-large-files
   - id: check-ast
@@ -40,7 +42,3 @@ repos:
   - id: fix-byte-order-marker
   - id: mixed-line-ending
   - id: trailing-whitespace
-- repo: https://github.com/psf/black
-  rev: 23.11.0
-  hooks:
-  - id: black
