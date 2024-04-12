@@ -22,6 +22,7 @@ homepage = "https://github.com/cmake-wheel/ndcurves"
 upstream = "https://github.com/loco-3d/ndcurves"
 
 [tool.cmeel]
+build-number = 1
 configure-args = ["-DBUILD_PYTHON_INTERFACE=ON"]
 
 [tool.ruff]
