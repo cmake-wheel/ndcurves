@@ -14,7 +14,7 @@ dependencies = [
 description = "Library for creating smooth cubic splines"
 license = "BSD-3-Clause"
 name = "ndcurves"
-version = "1.4.0"
+version = "1.4.1"
 
 [project.urls]
 changelog = "https://github.com/loco-3d/ndcurves/blob/master/CHANGELOG.md"
@@ -22,7 +22,6 @@ homepage = "https://github.com/cmake-wheel/ndcurves"
 upstream = "https://github.com/loco-3d/ndcurves"
 
 [tool.cmeel]
-build-number = 1
 configure-args = ["-DBUILD_PYTHON_INTERFACE=ON"]
 
 [tool.ruff]
