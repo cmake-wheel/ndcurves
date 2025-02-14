@@ -1,15 +1,15 @@
 [build-system]
 build-backend = "cmeel"
 requires = [
-  "cmeel-boost[build] ~= 1.83.0",
+  "cmeel-boost[build] ~= 1.87.0",
   "cmeel[build]",
-  "pin[build] ~= 2.7"
+  "pin[build]"
 ]
 
 [project]
 dependencies = [
-  "cmeel-boost ~= 1.83.0",
-  "pin ~= 2.7"
+  "cmeel-boost ~= 1.87.0",
+  "pin"
 ]
 description = "Library for creating smooth cubic splines"
 license = "BSD-3-Clause"
