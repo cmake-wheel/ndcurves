@@ -3,20 +3,20 @@ build-backend = "cmeel"
 requires = [
   "cmeel-boost[build] ~= 1.90.0",
   "cmeel[build]",
-  "libndcurves[build] == 2.1.1",
+  "libndcurves[build] == 2.3.0",
   "pin"
 ]
 
 [project]
 dependencies = [
   "cmeel-boost ~= 1.90.0",
-  "libndcurves == 2.1.1",
+  "libndcurves == 2.3.0",
   "pin"
 ]
 description = "Library for creating smooth cubic splines"
 license = "BSD-3-Clause"
 name = "ndcurves"
-version = "2.1.1"
+version = "2.3.0"
 
 [project.urls]
 changelog = "https://github.com/loco-3d/ndcurves/blob/devel/CHANGELOG.md"
