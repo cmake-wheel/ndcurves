@@ -1,4 +1,4 @@
-name: Release on PyPI
+name: Release on GitHub & PyPI
 
 on:
   push:
@@ -22,16 +22,12 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-24.04", "ubuntu-24.04-arm", "macos-15-intel", "macos-15"]
-        python: ["cp39", "cp310", "cp311", "cp312", "cp313", "cp314"]
+        python: ["cp310", "cp311", "cp312", "cp313", "cp314"]
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: 'true'
       - run: pipx install cibuildwheel
-      - run: echo "OPENMP=OFF" >> $GITHUB_ENV
-        if: ${{ startsWith(matrix.os, 'macos') }}
-      - run: echo "OPENMP=ON" >> $GITHUB_ENV
-        if: ${{ startsWith(matrix.os, 'ubuntu') }}
       - run: cibuildwheel
         env:
           CIBW_BUILD: "${{ matrix.python }}-*"
@@ -52,7 +48,7 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-24.04", "ubuntu-24.04-arm", "macos-15-intel", "macos-15"]
-        python: ["cp39", "cp310", "cp311", "cp312", "cp313", "cp314"]
+        python: ["cp310", "cp311", "cp312", "cp313", "cp314"]
     steps:
       - uses: actions/download-artifact@v8
         with:

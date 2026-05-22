@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "cmeel"
 requires = [
-  "cmeel-boost[build] ~= 1.89.0",
+  "cmeel-boost[build] ~= 1.90.0",
   "cmeel[build]",
   "libndcurves[build] == 2.1.1",
   "pin"
@@ -9,7 +9,7 @@ requires = [
 
 [project]
 dependencies = [
-  "cmeel-boost ~= 1.89.0",
+  "cmeel-boost ~= 1.90.0",
   "libndcurves == 2.1.1",
   "pin"
 ]
